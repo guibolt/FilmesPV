@@ -54,14 +54,16 @@ namespace FilmesPV.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Nome,Id,DataCadastro")] Categoria categoria)
+        public async Task<IActionResult> Create(Categoria categoria)
         {
             if (ModelState.IsValid)
             {
+                categoria.DataCadastro = DateTime.Now;
                 _context.Add(categoria);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+           
             return View(categoria);
         }
 

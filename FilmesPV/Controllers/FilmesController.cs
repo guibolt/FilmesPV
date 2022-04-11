@@ -75,6 +75,7 @@ namespace FilmesPV.Controllers
                 return View(filme);
             }
 
+            filme.DataCadastro = DateTime.Now;
             filme.Imagem = $"{imgPreFixo}{filme.ImagemUpload.FileName}";
 
             _context.Add(filme);

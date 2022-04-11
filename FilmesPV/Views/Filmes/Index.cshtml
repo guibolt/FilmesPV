@@ -1,4 +1,6 @@
-﻿@model IEnumerable<FilmesPV.Models.Filme>
+﻿@using System.IO
+
+@model IEnumerable<FilmesPV.Models.Filme>
 
 @{
     ViewData["Title"] = "Index";
@@ -38,6 +40,7 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
+ 
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Nome)
@@ -55,7 +58,7 @@
                 @Html.DisplayFor(modelItem => item.Resumo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Imagem)
+                <img src="~/imagens/@item.Imagem" alt="@item.Imagem" style="width: 70px; height: 100px" />
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DataCadastro)
