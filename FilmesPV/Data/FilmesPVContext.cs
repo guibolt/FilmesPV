@@ -15,5 +15,7 @@ namespace FilmesPV.Data
         }
 
         public DbSet<FilmesPV.Models.Filme> Filme { get; set; }
+
+        public DbSet<FilmesPV.Models.Categoria> Categoria { get; set; }
     }
 }
