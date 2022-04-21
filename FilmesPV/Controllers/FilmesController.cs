@@ -163,6 +163,19 @@ namespace FilmesPV.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpGet("FilmesPorCategoria")]
+        public async Task<IActionResult> FilmesCategoria() => View();
+
+        [HttpGet("FilmesPorCategoria/{categoriaSelecionada}")]
+        public async Task<IActionResult> FilmesCategoria(string categoriaSelecionada)
+        {
+
+           return View();
+        }
+        
+        
+
+        
         private bool FilmeExists(int id)
         {
             return _context.Filme.Any(e => e.Id == id);

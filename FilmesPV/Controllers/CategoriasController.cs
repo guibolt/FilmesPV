@@ -88,7 +88,7 @@ namespace FilmesPV.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Nome,Id,DataCadastro")] Categoria categoria)
+        public async Task<IActionResult> Edit(int id, Categoria categoria)
         {
             if (id != categoria.Id)
             {
@@ -99,7 +99,10 @@ namespace FilmesPV.Controllers
             {
                 try
                 {
-                    _context.Update(categoria);
+                    var categoriaAtualizar = _context.Categoria.Find(id);
+                    categoriaAtualizar.Nome = categoria.Nome;
+
+                    _context.Update(categoriaAtualizar);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
