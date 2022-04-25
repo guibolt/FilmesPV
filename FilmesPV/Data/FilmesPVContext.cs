@@ -9,10 +9,7 @@ namespace FilmesPV.Data
 {
     public class FilmesPVContext : DbContext
     {
-        public FilmesPVContext (DbContextOptions<FilmesPVContext> options)
-            : base(options)
-        {
-        }
+        public FilmesPVContext (DbContextOptions<FilmesPVContext> options) : base(options) => Database.EnsureCreated();
 
         public DbSet<FilmesPV.Models.Filme> Filme { get; set; }
 

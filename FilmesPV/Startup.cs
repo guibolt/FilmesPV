@@ -27,8 +27,10 @@ namespace FilmesPV
         {
             services.AddControllersWithViews();
 
-            services.AddDbContext<FilmesPVContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("FilmesPVContext")));
+            //services.AddDbContext<FilmesPVContext>(options =>
+            //        options.UseSqlServer(Configuration.GetConnectionString("FilmesPVContext")));
+     
+            services.AddDbContext<FilmesPVContext>(options => options.UseInMemoryDatabase("FilmesPVContext"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
