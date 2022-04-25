@@ -9,6 +9,7 @@ using FilmesPV.Data;
 using FilmesPV.Models;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using FilmesPV.Models.ViewModel;
 
 namespace FilmesPV.Controllers
 {
@@ -163,14 +164,29 @@ namespace FilmesPV.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet("FilmesPorCategoria")]
-        public async Task<IActionResult> FilmesCategoria() => View();
-
-        [HttpGet("FilmesPorCategoria/{categoriaSelecionada}")]
-        public async Task<IActionResult> FilmesCategoria(string categoriaSelecionada)
+        public IActionResult FilmesPorCategoria()
         {
+            ViewData["CategoriaId"] = new SelectList(_context.Set<Categoria>(), "Id", "Nome");
+            return View();
+        }
 
-           return View();
+        [HttpPost]
+        public  IActionResult FilmesPorCategoria(CategoriaBuscaVM categoriaBuscaVM)
+        {
+            var categoria = _context.Categoria.FirstOrDefault(x => x.Id == categoriaBuscaVM.CategoriaId);
+
+            if(categoria == null)
+            {
+                ViewData["CategoriaExite"] = false;
+                return View();
+            }
+
+            ViewData["CategoriaExite"] = true;
+
+            var filmesPVContext = _context.Filme.Where(x => x.CategoriaId == categoria.Id).Include(f => f.Categoria);
+
+            return View(nameof(Index),filmesPVContext);
+
         }
         
         
